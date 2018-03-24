@@ -2,13 +2,13 @@ from keras import backend as K
 from keras.engine.topology import Layer
 import numpy as np
 
-class MyLayer(Layer):
+class FuzzyLayer(Layer):
 
     def __init__(self, output_dim, **kwargs):
         if 'input_shape' not in kwargs and 'input_dim' in kwargs:
             kwargs['input_shape'] = (kwargs.pop('input_dim'),)
         self.output_dim = output_dim
-        super(MyLayer, self).__init__(**kwargs)
+        super(FuzzyLayer, self).__init__(**kwargs)
 
     def build(self, input_shape):
         # Create a trainable weight variable for this layer.
@@ -22,7 +22,7 @@ class MyLayer(Layer):
                                  initializer='ones',
                                  trainable=True)
 
-        super(MyLayer, self).build(input_shape)  # Be sure to call this somewhere!
+        super(FuzzyLayer, self).build(input_shape)  # Be sure to call this somewhere!
 
     def call(self, x):
 

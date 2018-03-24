@@ -24,7 +24,7 @@
     <Compile Include="formula.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="KerasFuzzy.py" />
+    <Compile Include="FuzzyLayer.py" />
     <Compile Include="test.py">
       <SubType>Code</SubType>
     </Compile>

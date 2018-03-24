@@ -1,4 +1,4 @@
-from KerasFuzzy import MyLayer
+from FuzzyLayer import FuzzyLayer
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
@@ -13,7 +13,7 @@ y_train = np.array( [([1,0,0,0] if a[0]<0.5 and a[1]<0.5 else
             [0,0,1,0] if a[0]>0.5 and a[1]<0.5 else [0,0,0,1]) for a in x_train])
 
 model = Sequential()
-model.add(MyLayer(20, input_dim=2))
+model.add(FuzzyLayer(20, input_dim=2))
 model.add(Dense(4, activation='sigmoid'))
 
 model.compile(loss='mean_squared_error',
