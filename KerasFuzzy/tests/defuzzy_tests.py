@@ -1,5 +1,5 @@
+from DeFuzzyLayer import DefuzzyLayer
 import unittest
-from DefuzzyLayer import DefuzzyLayer
 from keras import backend as K
 
 class DefuzzyLayerTest(unittest.TestCase):
@@ -32,4 +32,3 @@ class DefuzzyLayerTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

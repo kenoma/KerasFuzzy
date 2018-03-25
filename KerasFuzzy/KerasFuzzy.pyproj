@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>DefuzzyLayerTest.py</StartupFile>
+    <StartupFile>integration_tests\defuzzy_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,18 +21,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="formula.py">
+    <Compile Include="integration_tests\defuzzy_test.py" />
+    <Compile Include="tests\defuzzy_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DefuzzyLayer.py" />
     <Compile Include="FuzzyLayer.py" />
-    <Compile Include="DefuzzyLayerTest.py" />
-    <Compile Include="FuzzyLayerTest.py">
+    <Compile Include="tests\fuzzy_layer_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="test.py">
+    <Compile Include="integration_tests\simple_test.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="integration_tests\" />
+    <Folder Include="tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -1,5 +1,6 @@
 import unittest
 from FuzzyLayer import FuzzyLayer
+from DeFuzzyLayer import DefuzzyLayer
 from keras import backend as K
 
 class FuzzyLayerTest(unittest.TestCase):
@@ -109,7 +110,6 @@ class FuzzyLayerTest(unittest.TestCase):
         self.assertAlmostEqual(vals[0][1], 0.00002491600973, 7)
         self.assertAlmostEqual(vals[1][0], 0.9394130628, 7)
         self.assertAlmostEqual(vals[1][1], 0.004339483271, 7)
-        
 
 if __name__ == '__main__':
     unittest.main()
