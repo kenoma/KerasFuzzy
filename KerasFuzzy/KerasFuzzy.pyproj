@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test.py</StartupFile>
+    <StartupFile>DefuzzyLayerTest.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,16 +24,15 @@
     <Compile Include="formula.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DefuzzyLayer.py" />
     <Compile Include="FuzzyLayer.py" />
-    <Compile Include="UnitTests\FuzzyLayerTest.py">
+    <Compile Include="DefuzzyLayerTest.py" />
+    <Compile Include="FuzzyLayerTest.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test.py">
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UnitTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
