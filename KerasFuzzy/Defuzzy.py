@@ -2,8 +2,7 @@ from keras import backend as K
 from keras.engine.topology import Layer
 import numpy as np
 
-
-class FuzzyLayer(Layer):
+class DefuzzyLayer(Layer):
 
     def __init__(self, 
                  output_dim, 
@@ -15,7 +14,7 @@ class FuzzyLayer(Layer):
         self.output_dim = output_dim
         self.initializer_centers = initializer_centers
         self.initializer_sigmas = initializer_sigmas
-        super(FuzzyLayer, self).__init__(**kwargs)
+        super(DefuzzyLayer, self).__init__(**kwargs)
 
     def build(self, input_shape):
         self.batch = 1 if input_shape[0] is None else input_shape[0]
@@ -27,7 +26,7 @@ class FuzzyLayer(Layer):
                                  shape=(input_shape[1], self.output_dim),
                                  initializer=self.initializer_sigmas if self.initializer_sigmas is not None else 'ones',
                                  trainable=True)
-        super(FuzzyLayer, self).build(input_shape)  
+        super(DefuzzyLayer, self).build(input_shape)  
 
     def call(self, x):
         aligned_x = K.repeat_elements(K.expand_dims(x, axis = 2), self.output_dim, 2)
@@ -38,4 +37,3 @@ class FuzzyLayer(Layer):
         
     def compute_output_shape(self, input_shape):
         return (input_shape[0], self.output_dim)
-

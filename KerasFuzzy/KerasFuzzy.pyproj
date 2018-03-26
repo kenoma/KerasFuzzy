@@ -4,13 +4,15 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>integration_tests\defuzzy_test.py</StartupFile>
+    <StartupFile>fuzzy_layer_tests.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>KerasFuzzy</Name>
     <RootNamespace>KerasFuzzy</RootNamespace>
+    <InterpreterId>Global|ContinuumAnalytics|Anaconda35-64</InterpreterId>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,22 +23,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="integration_tests\defuzzy_test.py" />
-    <Compile Include="tests\defuzzy_tests.py">
+    <Compile Include="Defuzzy.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DefuzzyLayer.py" />
-    <Compile Include="FuzzyLayer.py" />
-    <Compile Include="tests\fuzzy_layer_tests.py">
+    <Compile Include="defuzzy_test.py" />
+    <Compile Include="FuzzyLayers.py" />
+    <Compile Include="fuzzy_layer_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="integration_tests\simple_test.py">
+    <Compile Include="simple_test.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="integration_tests\" />
-    <Folder Include="tests\" />
+    <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda35-64" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

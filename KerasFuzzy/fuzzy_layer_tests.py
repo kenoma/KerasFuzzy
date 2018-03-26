@@ -1,6 +1,6 @@
 import unittest
-from FuzzyLayer import FuzzyLayer
-from DeFuzzyLayer import DefuzzyLayer
+from FuzzyLayers import FuzzyLayer
+from Defuzzy import DefuzzyLayer
 from keras import backend as K
 
 class FuzzyLayerTest(unittest.TestCase):
@@ -91,6 +91,33 @@ class FuzzyLayerTest(unittest.TestCase):
         sess = K.get_session()
 
         layer = FuzzyLayer(odim)
+        layer.build(input_shape=(batch,input_dim))
+        
+        x = K.placeholder(shape=(batch, input_dim))
+        c = K.placeholder(shape=(input_dim, odim))
+        a = K.placeholder(shape=(input_dim, odim))
+        layer.c = c
+        layer.a = a
+        xc = layer.call(x)
+
+        xx = [[0.5, 0.8], [0.8, 0.5]]
+        cc = [[1, 0.2], [0.8, 0]]
+        aa = [[1/2, 1/4], [1, 1/8]]
+        vals = sess.run(xc, feed_dict={x: xx, c:cc, a:aa})
+        self.assertEqual(len(vals), batch)
+        self.assertEqual(len(vals[0]), odim)
+        self.assertAlmostEqual(vals[0][0], 0.7788007831, 7)
+        self.assertAlmostEqual(vals[0][1], 0.00002491600973, 7)
+        self.assertAlmostEqual(vals[1][0], 0.9394130628, 7)
+        self.assertAlmostEqual(vals[1][1], 0.004339483271, 7)
+
+    def test_defuzzy(self):
+        odim = 2
+        input_dim = 2
+        batch = 2
+        sess = K.get_session()
+
+        layer = DefuzzyLayer(odim)
         layer.build(input_shape=(batch,input_dim))
         
         x = K.placeholder(shape=(batch, input_dim))
