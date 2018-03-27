@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>fuzzy_layer_tests.py</StartupFile>
+    <StartupFile>case2_neuro_fuzzy.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,15 +23,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Defuzzy.py">
+    <Compile Include="case2_neuro_fuzzy.py" />
+    <Compile Include="DefuzzyLayer.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="defuzzy_test.py" />
-    <Compile Include="FuzzyLayers.py" />
+    <Compile Include="FuzzyLayer.py" />
     <Compile Include="fuzzy_layer_tests.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="simple_test.py">
+    <Compile Include="case1_full_fuzzy.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
