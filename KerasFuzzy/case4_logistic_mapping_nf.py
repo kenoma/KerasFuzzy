@@ -38,9 +38,8 @@ x_train = np.array(x)
 y_train = np.array(y)
 
 model = Sequential()
-f_layer = FuzzyLayer(5, input_dim=2)
+f_layer = FuzzyLayer(20, input_dim=2)
 model.add(f_layer)
-model.add(Dense(16, activation='sigmoid'))
 model.add(DefuzzyLayer(1))
 
 model.compile(loss='logcosh',

@@ -15,7 +15,7 @@ class DefuzzyLayer(Layer):
         super(DefuzzyLayer, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        self.batch = 1 if input_shape[0] is None else input_shape[0]
+        self.input_dimensions = list(input_shape)[:-1:-1]
         self.rules_outcome = self.add_weight(name='rules_outcome', 
                                  shape=(input_shape[1], self.output_dim),
                                  initializer= self.initializer_rules_outcome if self.initializer_rules_outcome is not None else 'uniform',
@@ -24,11 +24,13 @@ class DefuzzyLayer(Layer):
         super(DefuzzyLayer, self).build(input_shape)  
 
     def call(self, x):
-        aligned_x = K.repeat_elements(K.expand_dims(x, axis = 2), self.output_dim, 2)
-        aligned_rules_outcome = K.repeat_elements(K.expand_dims(self.rules_outcome, 0), self.batch, 0)
+        aligned_x = K.repeat_elements(K.expand_dims(x, axis = -1), self.output_dim, -1)
+        aligned_rules_outcome = self.rules_outcome
+        for dim in self.input_dimensions:
+            aligned_rules_outcome = K.repeat_elements(K.expand_dims(aligned_rules_outcome, 0), dim, 0)
         
-        xc = K.sum((aligned_x * aligned_rules_outcome), axis=1, keepdims=False)
+        xc = K.sum((aligned_x * aligned_rules_outcome), axis=-2, keepdims=False)
         return xc
         
     def compute_output_shape(self, input_shape):
-        return (input_shape[0], self.output_dim)
+        return tuple(input_shape[:-1]) + (self.output_dim,)

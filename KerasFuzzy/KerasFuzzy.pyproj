@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>case4_logistic_mapping.py</StartupFile>
+    <StartupFile>case3_circle_equation.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="case4_logistic_mapping_nf.py" />
+    <Compile Include="case4_logistic_mapping_lstm.py" />
     <Compile Include="case4_logistic_mapping.py" />
     <Compile Include="case3_circle_equation.py" />
     <Compile Include="case2_neuro_fuzzy.py" />
