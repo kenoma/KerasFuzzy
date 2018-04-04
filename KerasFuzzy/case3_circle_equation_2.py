@@ -20,19 +20,20 @@ np.random.shuffle(vals)
 
 for i in vals:
     x.append([r * m.cos(i), r * m.sin(i)])
-    y.append(i)
+    y.append(i * m.cos(10 * i))
 
-for i in np.linspace(0, 1.9 * m.pi, num=25):
+for i in np.linspace(0, 1.9 * m.pi, num=333):
     x_test.append([r * m.cos(i), r * m.sin(i)])
-    y_test.append(i)
+    y_test.append(i * m.cos(10 * i))
 
 x_train = np.array(x)
 y_train = np.array(y)
 
-f_layer = FuzzyLayer(20, input_dim=2)
+f_layer = FuzzyLayer(40, input_dim=2)
 model = Sequential()
 model.add(f_layer)
-#model.add(Dense(20, activation='sigmoid'))
+model.add(Dense(100, activation='sigmoid'))
+model.add(Dense(100, activation='sigmoid'))
 model.add(DefuzzyLayer(1))
 
 model.compile(loss='logcosh',
@@ -40,7 +41,7 @@ model.compile(loss='logcosh',
               metrics=['mae'])
 
 model.fit(x_train, y_train,
-          epochs=500,
+          epochs=1000,
           verbose=1,
           batch_size=100)
 
