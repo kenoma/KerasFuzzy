@@ -38,6 +38,7 @@ class FuzzyLayer(Layer):
             aligned_a = K.repeat_elements(K.expand_dims(aligned_a, 0), dim, 0)
 
         xc = K.exp(-K.sum(K.square((aligned_x - aligned_c) / (2 * aligned_a)), axis=-2, keepdims=False))
+
         return xc
         
     def compute_output_shape(self, input_shape):

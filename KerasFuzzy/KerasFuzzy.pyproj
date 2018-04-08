@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>case5_iris_dataset.py</StartupFile>
+    <StartupFile>case3_circle_equation_2.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

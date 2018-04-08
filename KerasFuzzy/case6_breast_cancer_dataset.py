@@ -23,8 +23,10 @@ x_train, x_test, y_train, y_test = train_test_split(data.data, Y, test_size=0.1)
 K = 20
 indices = rnd.sample(range(len(x_train)), K)
 
-model = Sequential()
 f_layer = FuzzyLayer(K, initializer_centers=lambda x: np.transpose(np.array([x_train[i] for i in indices])), input_dim=30)
+
+
+model = Sequential()
 model.add(f_layer)
 model.add(Dense(20, activation='sigmoid'))
 model.add(Dense(2, activation='softmax'))
@@ -33,12 +35,13 @@ model.add(Dense(2, activation='softmax'))
 model.compile(loss='mean_squared_error',
               optimizer='adam',
               metrics=['binary_accuracy'])
+bweights = f_layer.get_weights()
 
 model.fit(np.array(x_train), 
           np.array(y_train),
-          epochs=3000,
+          epochs=6000,
           verbose=1,
-          batch_size=100)
+          batch_size=10)
 
 score = model.evaluate(np.array(x_test), np.array(y_test), verbose=True) 
 print(score)
@@ -52,7 +55,8 @@ plt.title('load_breast_cancer')
 plt.ylabel('x[0]')
 plt.xlabel('x[1]')
 plt.scatter([a[0] for a in x_train], [a[1] for a in x_train], c=(0,0,0), alpha=0.5,s=1)
-plt.scatter(weights[0][0], weights[0][1], c=(1,0,0), alpha=0.8,s=15)
+plt.scatter(weights[0][0], weights[0][1], c=(1,0,0), alpha=0.8, s=15)
+plt.scatter(bweights[0][0], bweights[0][1], c=(0,0,1), alpha=0.8, s=10)
 plt.show()
-plt.pause(120)
+plt.pause(12000)
 
