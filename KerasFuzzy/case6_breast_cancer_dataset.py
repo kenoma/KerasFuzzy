@@ -11,22 +11,23 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import random as rnd
 
-iris = datasets.load_iris()
-Y=[]
-for y in iris.target:
-    tmp = np.zeros(3)
+data = datasets.load_breast_cancer()
+Y = []
+for y in data.target:
+    tmp = np.zeros(2)
     tmp[y] = 1
     Y.append(tmp)
 
-x_train, x_test, y_train, y_test = train_test_split(iris.data, Y, test_size=0.1)
+x_train, x_test, y_train, y_test = train_test_split(data.data, Y, test_size=0.1)
 
-K=5
+K = 20
 indices = rnd.sample(range(len(x_train)), K)
+
 model = Sequential()
-f_layer = FuzzyLayer(K, initializer_centers=lambda x: np.transpose(np.array([x_train[i] for i in indices])), input_dim=4)
+f_layer = FuzzyLayer(K, initializer_centers=lambda x: np.transpose(np.array([x_train[i] for i in indices])), input_dim=30)
 model.add(f_layer)
-#model.add(Dense(3, activation='sigmoid'))
-model.add(Dense(3, activation='softmax'))
+model.add(Dense(20, activation='sigmoid'))
+model.add(Dense(2, activation='softmax'))
 
 
 model.compile(loss='mean_squared_error',
@@ -35,19 +36,19 @@ model.compile(loss='mean_squared_error',
 
 model.fit(np.array(x_train), 
           np.array(y_train),
-          epochs=1000,
+          epochs=3000,
           verbose=1,
-          batch_size=1)
+          batch_size=100)
 
 score = model.evaluate(np.array(x_test), np.array(y_test), verbose=True) 
 print(score)
 weights = f_layer.get_weights()
-print(weights)
+#print(weights)
 
 plt.ion()
 plt.show()
 plt.clf()
-plt.title('Iris')
+plt.title('load_breast_cancer')
 plt.ylabel('x[0]')
 plt.xlabel('x[1]')
 plt.scatter([a[0] for a in x_train], [a[1] for a in x_train], c=(0,0,0), alpha=0.5,s=1)

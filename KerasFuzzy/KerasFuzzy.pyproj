@@ -24,6 +24,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="case3_circle_equation_2.py" />
+    <Compile Include="case6_breast_cancer_dataset.py" />
     <Compile Include="case5_iris_dataset.py" />
     <Compile Include="case4_logistic_mapping_nf.py" />
     <Compile Include="case4_logistic_mapping_lstm.py" />
