@@ -22,7 +22,7 @@ where `x` is an input vector of `dim` length, `c` is centroid of j-th membership
 
 ## Sample
 
-```
+```python
 import keras
 from FuzzyLayer import FuzzyLayer
 from DefuzzyLayer import DefuzzyLayer
