@@ -1,4 +1,4 @@
-Main goal of this project is to provide trainable representation of real-word input data. 
+Main goal of this project is to provide trainable representations of real-word input data to regular neural networks. 
 There are two classes implemented so far: `FuzzyLayer` and `DefuzzyLayer`.
 
 ## FuzzyLayer
