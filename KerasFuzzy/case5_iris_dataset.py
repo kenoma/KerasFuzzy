@@ -10,6 +10,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import numpy as np
 import random as rnd
+from matplotlib.patches import Ellipse
 
 iris = datasets.load_iris()
 Y=[]
@@ -35,7 +36,7 @@ model.compile(loss='mean_squared_error',
 
 model.fit(np.array(x_train), 
           np.array(y_train),
-          epochs=1000,
+          epochs=100,
           verbose=1,
           batch_size=1)
 
@@ -51,6 +52,11 @@ plt.title('Iris')
 plt.ylabel('x[0]')
 plt.xlabel('x[1]')
 plt.scatter([a[0] for a in x_train], [a[1] for a in x_train], c=(0,0,0), alpha=0.5,s=1)
+for i in range(0,K):
+    ellipse = Ellipse((weights[0][0][i], weights[0][1][i]), weights[1][0][i],weights[1][1][i], color='r', fill=False)
+    ax = plt.gca()
+    ax.add_patch(ellipse)
+
 plt.scatter(weights[0][0], weights[0][1], c=(1,0,0), alpha=0.8,s=15)
 plt.show()
 plt.pause(120)
