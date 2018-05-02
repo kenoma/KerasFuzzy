@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f2291b6a-6a89-44b7-ad92-568807778662</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>case6_breast_cancer_dataset.py</StartupFile>
+    <StartupFile>case7_tensor_lstm.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="case3_circle_equation_2.py" />
+    <Compile Include="case7_tensor_lstm.py" />
+    <Compile Include="case7_tensor.py" />
     <Compile Include="case6_breast_cancer_dataset.py" />
     <Compile Include="case5_iris_dataset.py" />
     <Compile Include="case4_logistic_mapping_nf.py" />
@@ -44,6 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda35-64" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="train_5820_3333.csv" />
+    <Content Include="train_6850_9910.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
