@@ -1,10 +1,13 @@
 {
-    "python.unitTest.unittestArgs": [
+    "python.testing.unittestArgs": [
         "-v",
         "-s",
         "./KerasFuzzy",
         "-p",
-        "*test*.py"
+        "*test.py"
     ],
-    "python.unitTest.unittestEnabled": true
+    "python.testing.unittestEnabled": true,
+    "python.testing.pyTestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.pythonPath": "D:\\Anaconda3\\envs\\tf_gpu\\python.exe"
 }
