@@ -1,0 +1,5 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "D:\\Anaconda3\\envs\\tf_gpu\\python.exe"
+}
