@@ -2,11 +2,8 @@ import sys
 sys.path.insert(0, '../layers')
 import keras
 from fuzzy_layer import FuzzyLayer
-from defuzzy_layer import DefuzzyLayer
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
-from keras.optimizers import SGD
-from keras.utils import plot_model
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -63,3 +60,5 @@ plt.scatter(weights[0][0], weights[0][1], c=(1,0,0), alpha=0.8,s=15)
 plt.show()
 plt.pause(120)
 
+#%%
+# %%
