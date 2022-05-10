@@ -52,8 +52,8 @@ print(x_train.shape)
 print(x_test.shape)
 
 autoencoder.fit(x_train, x_train,
-                epochs=100,
-                batch_size=32,
+                epochs=300,
+                batch_size=16,
                 shuffle=True,
                 validation_data=(x_test, x_test))
 

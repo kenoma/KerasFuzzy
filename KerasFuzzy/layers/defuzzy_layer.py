@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
 from keras import backend as K
-import numpy as np
 
 class DefuzzyLayer(keras.layers.Layer):
 

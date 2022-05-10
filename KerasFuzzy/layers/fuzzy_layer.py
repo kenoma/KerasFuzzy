@@ -1,7 +1,6 @@
 from keras import backend as K
 from tensorflow import keras
 import tensorflow as tf
-#import numpy as np
 
 class FuzzyLayer(keras.layers.Layer):
 
@@ -19,9 +18,6 @@ class FuzzyLayer(keras.layers.Layer):
 
     def build(self, input_shape):
         self.input_dimensions = list(input_shape)[:-1:-1]
-        
-        #self.initializer_centers if self.initializer_centers is not None else 'uniform'
-        #self.initializer_sigmas if self.initializer_sigmas is not None else 'ones'
 
         c_init_values =[]
         
@@ -49,9 +45,8 @@ class FuzzyLayer(keras.layers.Layer):
             aligned_a = K.repeat_elements(K.expand_dims(aligned_a, 0), dim, 0)
 
         xc = K.exp(-K.sum(K.square((aligned_x - aligned_c) / (2 * aligned_a)), axis=-2, keepdims=False))
-        #sums = K.sum(xc,axis=-1,keepdims=True)
-        #less = K.ones_like(sums) * K.epsilon()
-        return xc# xc / K.maximum(sums, less)
+        
+        return xc
         
     def compute_output_shape(self, input_shape):
         return tuple(input_shape[:-1]) + (self.output_dim,)
