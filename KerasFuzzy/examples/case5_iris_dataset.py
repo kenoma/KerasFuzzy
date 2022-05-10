@@ -23,7 +23,7 @@ x_train, x_test, y_train, y_test = train_test_split(iris.data, Y, test_size=0.1)
 K=5
 indices = rnd.sample(range(len(x_train)), K)
 model = Sequential()
-f_layer = FuzzyLayer(K, initial_centers=lambda x: np.transpose(np.array([x_train[i] for i in indices])), input_dim=4)
+f_layer = FuzzyLayer(K, initial_centers=np.transpose(np.array([x_train[i] for i in indices])), input_dim=4)
 model.add(f_layer)
 #model.add(Dense(3, activation='sigmoid'))
 model.add(Dense(3, activation='softmax'))
