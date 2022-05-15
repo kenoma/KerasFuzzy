@@ -1,6 +1,8 @@
+import sys
+sys.path.insert(0, '../layers')
 import unittest
-from FuzzyLayer import FuzzyLayer
-from DefuzzyLayer import DefuzzyLayer
+from fuzzy_layer import FuzzyLayer
+from defuzzy_layer import DefuzzyLayer
 import tensorflow.compat.v1.keras.backend as K
 import tensorflow as tf
 tf.compat.v1.disable_eager_execution()

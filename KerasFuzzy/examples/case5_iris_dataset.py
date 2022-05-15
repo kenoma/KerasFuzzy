@@ -1,7 +1,9 @@
+#%%
 import sys
 sys.path.insert(0, '../layers')
 import keras
-from fuzzy_layer import FuzzyLayer
+#from fuzzy_layer import FuzzyLayer
+from fuzzy_layer_2 import FuzzyLayer2
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 import matplotlib.pyplot as plt
@@ -23,7 +25,7 @@ x_train, x_test, y_train, y_test = train_test_split(iris.data, Y, test_size=0.1)
 K=5
 indices = rnd.sample(range(len(x_train)), K)
 model = Sequential()
-f_layer = FuzzyLayer(K, initial_centers=np.transpose(np.array([x_train[i] for i in indices])), input_dim=4)
+f_layer = FuzzyLayer2(K, initial_centers=np.transpose(np.array([x_train[i] for i in indices])), input_dim=4)
 model.add(f_layer)
 #model.add(Dense(3, activation='sigmoid'))
 model.add(Dense(3, activation='softmax'))
@@ -36,7 +38,7 @@ model.compile(loss='mean_squared_error',
 model.fit(np.array(x_train), 
           np.array(y_train),
           epochs=100,
-          verbose=1,
+          verbose=0,
           batch_size=1)
 
 score = model.evaluate(np.array(x_test), np.array(y_test), verbose=True) 
@@ -52,13 +54,9 @@ plt.ylabel('x[0]')
 plt.xlabel('x[1]')
 plt.scatter([a[0] for a in x_train], [a[1] for a in x_train], c=(0,0,0), alpha=0.5,s=1)
 for i in range(0,K):
-    ellipse = Ellipse((weights[0][0][i], weights[0][1][i]), weights[1][0][i],weights[1][1][i], color='r', fill=False)
+    ellipse = Ellipse((weights[0][0][i], weights[0][1][i]), weights[1][0][i], weights[1][1][i], color='r', fill=False)
     ax = plt.gca()
     ax.add_patch(ellipse)
 
 plt.scatter(weights[0][0], weights[0][1], c=(1,0,0), alpha=0.8,s=15)
-plt.show()
-plt.pause(120)
-
 #%%
-# %%
