@@ -6,6 +6,7 @@ import numpy as np
 from keras import backend as K
 from tensorflow import keras
 from fuzzy_layer_2 import FuzzyLayer2
+from defuzzy_layer import DefuzzyLayer
 #%%
 output_dim = 2
 input_dim = 2
@@ -176,8 +177,9 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import numpy as np
 import random as rnd
+import matplotlib.pyplot as plt
 
-output_dim = 7
+output_dim = 3
 batch = 10
 iris = datasets.load_iris()
 Y=[]
@@ -192,8 +194,8 @@ indices = rnd.sample(range(len(x_train)), output_dim)
 model = Sequential()
 f_layer = FuzzyLayer2(output_dim, initial_centers=np.array([x_train[i] for i in indices]))
 model.add(f_layer)
+model.add(DefuzzyLayer(3))
 model.add(Dense(3, activation='softmax'))
-
 
 model.compile(loss='mean_squared_error',
               optimizer='adam',
@@ -201,7 +203,7 @@ model.compile(loss='mean_squared_error',
 
 model.fit(np.array(x_train), 
           np.array(y_train),
-          epochs = 200,
+          epochs = 4000,
           verbose = 0,
           batch_size=batch)
 
@@ -209,4 +211,34 @@ score = model.evaluate(np.array(x_test), np.array(y_test), verbose=1)
 print(score)
 weights = f_layer.get_weights()
 
+
 # %%
+#colors for centroids and classes does not match
+for pr in [[0,1],[1,2],[2,3]]:
+    plt.ion()
+    plt.show()
+    plt.clf()
+    plt.title('Iris')
+    plt.ylabel(f'x[{pr[0]}]')
+    plt.xlabel(f'x[{pr[1]}]')
+    line_color = ["blue", "red", "purple"]
+    plt.scatter([a[pr[0]] for a in x_test], [a[pr[1]] for a in x_test], c=[line_color[np.argmax(a)] for a in model.predict(np.array(x_test))], alpha=0.9, s=2)
+   
+    for odim in range(output_dim):
+        origin = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,0,0,0,1]))
+        ort_1 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([ 1,0,0,0,1]))
+        ort_2 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([-1,0,0,0,1]))
+        ort_3 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0, 1,0,0,1]))
+        ort_4 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,-1,0,0,1]))
+        ort_5 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,0, 1,0,1]))
+        ort_6 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,0,-1,0,1]))
+        ort_7 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,0,0, 1,1]))
+        ort_8 = np.dot(np.vstack([weights[0][odim], np.array([0,0,0,0,1])]), np.array([0,0,0,-1,1]))
+        plt.plot([-origin[pr[0]], -ort_1[pr[0]]], [-origin[pr[1]], -ort_1[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_2[pr[0]]], [-origin[pr[1]], -ort_2[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_3[pr[0]]], [-origin[pr[1]], -ort_3[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_4[pr[0]]], [-origin[pr[1]], -ort_4[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_5[pr[0]]], [-origin[pr[1]], -ort_5[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_6[pr[0]]], [-origin[pr[1]], -ort_6[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_7[pr[0]]], [-origin[pr[1]], -ort_7[pr[1]]], c =line_color[odim], linewidth=2)
+        plt.plot([-origin[pr[0]], -ort_8[pr[0]]], [-origin[pr[1]], -ort_8[pr[1]]], c =line_color[odim], linewidth=2)

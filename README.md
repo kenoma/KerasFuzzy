@@ -43,3 +43,19 @@ model.fit(x_train, y_train,
           verbose=1,
           batch_size=100)
 ```
+
+## FuzzyLayer 2
+
+Membership function for layer `FuzzyLayer2` have form $ \mu(x, A) = e^{ -|| [A . \~x]_{1\cdots m} ||^2} $ where $m$ is task dimension,  $A$ is transformation matrix in form 
+
+$  A_{(m+1)\times (m+1)} =
+  \left[ {\begin{array}{cccc}
+    s_{1} & a_{12} & \cdots & a_{1m} & c_{1}\\
+    a_{21} & s_{2} & \cdots & a_{2m} & c_{2}\\
+    \vdots & \vdots & \ddots & \vdots & \vdots\\
+    a_{m1} & a_{m2} & \cdots & s_{m} & c_{m}\\
+    0 & 0 & \cdots & 0 & 1\\
+  \end{array} } \right] 
+$ with $c_{1\cdots m}$ - centroid, $s_{1\cdots m}$ - scaling factor, $a_{1\cdots m, 1\cdots m}$ - alignment coefficients and $\~x$ is an extended with $1$ vector $\~x = [x_1, x_2, \cdots, x_m, 1]$.
+
+Main benefit of `FuzzyLayer2` over `FuzzyLayer` is that fuzzy centroids can be placed is task dimension more precisely to cover cluster.
