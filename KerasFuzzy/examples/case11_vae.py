@@ -1,12 +1,13 @@
 #%%
-import sys
-sys.path.insert(0, '../layers')
 from keras.layers import Input, Dense
 from keras.models import Model
 from keras.datasets import mnist
 import numpy as np
 import matplotlib.pyplot as plt
-from fuzzy_layer import FuzzyLayer
+import sys
+sys.path.insert(0, '../layers')
+from fuzzy_layer_2 import FuzzyLayer2
+from defuzzy_layer import DefuzzyLayer
 from tensorflow.python.client import device_lib
 import numpy as np
 import tensorflow as tf
@@ -81,7 +82,8 @@ encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder")
 encoder.summary()
 # %%
 latent_inputs = keras.Input(shape=(latent_dim,))
-x = FuzzyLayer(30)(latent_inputs)
+x = FuzzyLayer2(10)(latent_inputs)
+x = DefuzzyLayer(300)(x)
 x = layers.Dense(7 * 7 * 64, activation="relu")(x)
 x = layers.Reshape((7, 7, 64))(x)
 x = layers.Conv2DTranspose(64, 3, activation="relu", strides=2, padding="same")(x)
@@ -97,7 +99,7 @@ mnist_digits = np.expand_dims(mnist_digits, -1).astype("float32") / 255
 
 vae = VAE(encoder, decoder)
 vae.compile(optimizer=keras.optimizers.Adam())
-vae.fit(mnist_digits, epochs=30, batch_size=128)
+vae.fit(mnist_digits, epochs=120, batch_size=256)
 
 # %%
 import matplotlib.pyplot as plt

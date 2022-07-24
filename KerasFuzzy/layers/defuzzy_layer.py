@@ -38,3 +38,6 @@ class DefuzzyLayer(keras.layers.Layer):
         
     def compute_output_shape(self, input_shape):
         return tuple(input_shape[:-1]) + (self.output_dim,)
+    
+    def get_config(self):
+        return {"rules_outcome": self.rules_outcome.numpy()}
