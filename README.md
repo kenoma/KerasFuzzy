@@ -19,8 +19,21 @@ where `x` is an input vector of `dim` length, `c` is centroid of j-th membership
 
 <img id="image" src="http://mathurl.com/yabcgzn9.png" alt="d \left( x,r \right) =\sum _{i=0}^{{\it input\_dim}}x_{{i}}r_{{i}}" style="border: 0; padding: 1ex 2ex 1ex 2ex">
 
+## FuzzyLayer 2
 
-## Sample
+Membership function for layer `FuzzyLayer2` have form $\mu(x, A) = e^{ -|| \[A . \~x\]_{1 \cdots m} ||^2}$ where $m$ is task dimension,  $A$ is transformation matrix in form 
+
+![image](https://user-images.githubusercontent.com/6205671/170839478-2c80ba81-1ea5-40c3-a9cb-350f4cf1f9d5.png)
+
+with $c_{1\cdots m}$ - centroid, 
+$s_{1\cdots m}$ - scaling factor, 
+$a_{1\cdots m, 1\cdots m}$ - alignment coefficients and 
+$x$ is an extended with $1$ vector 
+$x = [x_1, x_2, \cdots, x_m, 1]$.
+
+Main benefit of `FuzzyLayer2` over `FuzzyLayer` is that fuzzy centroids can be placed in task dimension more precisely to cover cluster.
+
+## Basic sample
 
 ```python
 import keras
@@ -44,18 +57,29 @@ model.fit(x_train, y_train,
           batch_size=100)
 ```
 
-## FuzzyLayer 2
+## MNIST classification with neuro-fuzzy model
 
-Membership function for layer `FuzzyLayer2` have form $ \mu(x, A) = e^{ -|| [A . \~x]_{1\cdots m} ||^2} $ where $m$ is task dimension,  $A$ is transformation matrix in form 
+```python
+latent_dim = 3
 
-$  A_{(m+1)\times (m+1)} =
-  \left[ {\begin{array}{cccc}
-    s_{1} & a_{12} & \cdots & a_{1m} & c_{1}\\
-    a_{21} & s_{2} & \cdots & a_{2m} & c_{2}\\
-    \vdots & \vdots & \ddots & \vdots & \vdots\\
-    a_{m1} & a_{m2} & \cdots & s_{m} & c_{m}\\
-    0 & 0 & \cdots & 0 & 1\\
-  \end{array} } \right] 
-$ with $c_{1\cdots m}$ - centroid, $s_{1\cdots m}$ - scaling factor, $a_{1\cdots m, 1\cdots m}$ - alignment coefficients and $\~x$ is an extended with $1$ vector $\~x = [x_1, x_2, \cdots, x_m, 1]$.
+mnist_inputs = keras.Input(shape=(28, 28, 1))
+x = layers.Conv2D(64, 3, activation="relu", padding="same")(mnist_inputs)
+x = layers.Conv2D(64, 3, activation="relu", padding="same")(x)
+x = layers.Conv2D(32, 5, activation="relu", strides=2, padding="same")(x)
+shape_before_flattening = K.int_shape(x)
+x = layers.Flatten()(x)
+z = layers.Dense(latent_dim, name="z")(x)
+base_model = keras.Model(mnist_inputs, z)
 
-Main benefit of `FuzzyLayer2` over `FuzzyLayer` is that fuzzy centroids can be placed is task dimension more precisely to cover cluster.
+x = base_model(mnist_inputs)
+x = FuzzyLayer2(10, name="fuzzy")(x)
+x = DefuzzyLayer(10, name="defuzzy")(x)
+x = tf.keras.layers.Softmax()(x)
+fuzzy_model = keras.Model(mnist_inputs, x)
+```
+
+Accuracy achieved by training `fuzzy_model` is about 0.995 and presented model has nice clustered latent layer `z` structure:
+
+![b1](https://user-images.githubusercontent.com/6205671/173923018-b2edecfe-dcab-4da7-83e8-9eb79fd61b36.png)
+
+
