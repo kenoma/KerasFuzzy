@@ -31,7 +31,7 @@ $a_{1\cdots m, 1\cdots m}$ - alignment coefficients and
 $x$ is an extended with $1$ vector 
 $x = [x_1, x_2, \cdots, x_m, 1]$.
 
-Main benefit of `FuzzyLayer2` over `FuzzyLayer` is that fuzzy centroids can be placed in task dimension more precisely to cover cluster.
+Main benefit of `FuzzyLayer2` over `FuzzyLayer` is that fuzzy centroids are aligned in arbitrary direction to cover cluster structures more preciesly.
 
 ## Basic sample
 
