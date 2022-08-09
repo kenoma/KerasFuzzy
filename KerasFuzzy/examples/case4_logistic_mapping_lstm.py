@@ -1,3 +1,57 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5757c5ec66f49bd2ffe0c20d45d0d0cef44526ee2adb4d90fc5f1bf9fbcdab63
-size 1167
+import sys
+sys.path.insert(0, '../layers')
+import keras
+from fuzzy_layer import FuzzyLayer
+from defuzzy_layer import DefuzzyLayer
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.layers import LSTM
+from keras.layers import Embedding
+
+# Generate dummy data
+import numpy as np
+
+x = []
+y = []
+x_test = []
+y_test = []
+x_n = 0.01
+l = 3.8
+
+for i in range(0,10000):
+    x_old = x_n
+    x_n = l * x_n * (1 - x_n)
+    x_nplus = l * x_n * (1 - x_n)
+
+    x.append([[x_old], [x_n]])
+    y.append([x_nplus])
+
+for i in range(0, 100):
+    x_old = x_n
+    x_n = l * x_n * (1 - x_n)
+    x_nplus = l * x_n * (1 - x_n)
+
+    x_test.append([[x_old], [x_n]])
+    y_test.append([x_nplus])
+    
+
+x_train = np.array(x)
+y_train = np.array(y)
+
+model = Sequential()
+model.add(FuzzyLayer(40, input_shape=(2, 1)))
+model.add(LSTM(20))
+model.add(DefuzzyLayer(1))
+
+model.compile(loss='logcosh',
+              optimizer='rmsprop',
+              metrics=['mae'])
+
+model.fit(x_train, y_train,
+          epochs=1000,
+          verbose=0,
+          batch_size=1)
+
+score = model.evaluate(np.array(x_test), np.array(y_test), verbose=True) 
+print(score)
+#%%
