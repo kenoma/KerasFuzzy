@@ -1,13 +1,3 @@
-{
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "./KerasFuzzy",
-        "-p",
-        "*test.py"
-    ],
-    "python.testing.unittestEnabled": true,
-    "python.testing.pyTestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.pythonPath": "D:\\Anaconda3\\envs\\tf_gpu\\python.exe"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b1d47dc4fd95fe8e58f375502ad6ce0b55dee2b2367a926b4da268ca951e063d
+size 332

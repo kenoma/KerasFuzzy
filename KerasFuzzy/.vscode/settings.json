@@ -1,5 +1,3 @@
-{
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.pythonPath": "D:\\Anaconda3\\envs\\tf_gpu\\python.exe"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:3f485e1daf9df433a81ba5641e69370e3203a8ddf8ee088ad8fe07b2730d4993
+size 148
