@@ -85,4 +85,5 @@ Accuracy achieved by training `fuzzy_model` is about 0.995 and presented model h
 ## Usage examples
 
 [MNIST fuzzy anomaly detection with VAE](https://github.com/kenoma/KerasFuzzy/blob/master/KerasFuzzy/experiments/digit-recognizer-anomaly-detection-fae.ipynb)
+
 [MNIST fuzzy anomaly detection with CVAE](https://github.com/kenoma/KerasFuzzy/blob/master/KerasFuzzy/experiments/digit-recognizer-anomaly-detection.ipynb)
