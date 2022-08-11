@@ -88,6 +88,6 @@ Accuracy achieved by training `fuzzy_model` is about 0.995 and presented model h
 
 [MNIST fuzzy anomaly detection with CVAE](https://github.com/kenoma/KerasFuzzy/blob/master/KerasFuzzy/experiments/digit-recognizer-anomaly-detection.ipynb)
 
-[MNIST semi-supervised (partially labeled dataset) learning](https://github.com/kenoma/KerasFuzzy/blob/master/KerasFuzzy/experiments/digit-recognizer-semi-supervised.ipynb)
+[MNIST semi-supervised (partially labeled dataset) learning with fuzzy CVAE](https://github.com/kenoma/KerasFuzzy/blob/master/KerasFuzzy/experiments/digit-recognizer-semi-supervised.ipynb)
 
 
